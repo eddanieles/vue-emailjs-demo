@@ -4,7 +4,7 @@
           src="../assets/machine learning.png"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
-        <form class="contact-form" @submit.prevent="sendEmail">
+        <v-form ref="form" class="contact-form" @submit.prevent="sendEmail">
             <v-container class="fill-height">
                 <v-row justify="center" align="center" class="mt-5">
                     <v-col cols="12">
@@ -21,8 +21,8 @@
                     </v-col>
 
                     <v-col cols="12" md="6">
-                        <v-text-field name="from_name" label="Your Name*" solo light></v-text-field>
-                        <v-text-field name="from_email" label="Your Email*" solo light></v-text-field>
+                        <v-text-field name="from_name" label="Your Name*" solo light required></v-text-field>
+                        <v-text-field name="from_email" label="Your Email*" solo light required></v-text-field>
                         <v-text-field name="from_phone" label="Your Phone" solo light></v-text-field>
                     </v-col>
 
@@ -31,6 +31,7 @@
                         light
                         outlined
                         solo
+                        required
                         name="message"
                         label="Your Message*"
                         ></v-textarea>
@@ -51,7 +52,7 @@
             <label>Message</label>
             <textarea name="message"></textarea>
             <input type="submit" value="Send"> -->
-        </form>
+        </v-form>
         </v-img>
     </div>
 </template>
@@ -62,12 +63,15 @@ import emailjs from 'emailjs-com';
 export default {
   methods: {
     sendEmail: (e) => {
+      let that = this;
       emailjs.sendForm('service_vztm2qa', 'template_6w4skyd', e.target, 'user_v6guEmIacckV6bNjPCz5c')
         .then((result) => {
+            that.$refs.form.validate()
             console.log('SUCCESS!', result.status, result.text);
-            console.log(e);
+            that.$refs.form.reset()
+            alert("Email was successfully sent");
         }, (error) => {
-            console.log('FAILED...', error);
+            alert("Email FAILED...", error);
         });
     }
   }
