@@ -1,39 +1,58 @@
 <template>
-    <div class="container">
-        <!-- <form>
-          <label>Name</label>
-          <input 
-            type="text" 
-            v-model="name"
-            name="name"
-            placeholder="Your Name"
-          >
-          <label>Email</label>
-          <input 
-            type="email" 
-            v-model="email"
-            name="email"
-            placeholder="Your Email"
-            >
-          <label>Message</label>
-          <textarea 
-            name="message"
-            v-model="message"
-            cols="30" rows="5"
-            placeholder="Message">
-          </textarea>
-          
-          <input type="submit" value="Send">
-        </form> -->
+    <div>
+        <v-img
+          src="../assets/machine learning.png"
+          gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
+        >
         <form class="contact-form" @submit.prevent="sendEmail">
-            <label>Name</label>
-            <input type="text" name="user_name">
+            <v-container class="fill-height">
+                <v-row justify="center" align="center" class="mt-5">
+                    <v-col cols="12">
+                        <div class="pt-12 text-center">
+                        <h3 class="display-1 font-weight-blod">
+                            CONTACT ME
+                        </h3>
+                        <p class="body-2 my-3">
+                            <span class="welcome">
+                            I thought this was a cool feature and I didn't want to remove it.
+                            </span>
+                        </p>
+                        </div>
+                    </v-col>
+
+                    <v-col cols="12" md="6">
+                        <v-text-field name="from_name" label="Your Name*" solo light></v-text-field>
+                        <v-text-field name="from_email" label="Your Email*" solo light></v-text-field>
+                        <v-text-field name="from_phone" label="Your Phone" solo light></v-text-field>
+                    </v-col>
+
+                    <v-col cols="12" md="6" class="fill-height">
+                        <v-textarea
+                        light
+                        outlined
+                        solo
+                        name="message"
+                        label="Your Message*"
+                        ></v-textarea>
+                    </v-col>
+
+                    <v-col cols="12" class="text-center">
+                        <v-btn x-large color="accent">
+                        <input type="submit" value="Send Message">
+                        </v-btn>
+                    </v-col>
+                </v-row>
+            </v-container>
+
+            <!-- <label>Name</label>
+            <input type="text" name="from_name">
             <label>Email</label>
-            <input type="email" name="user_email">
+            <input type="email" name="from_email">
             <label>Message</label>
             <textarea name="message"></textarea>
-            <input type="submit" value="Send">
+            <input type="submit" value="Send"> -->
         </form>
+        </v-img>
     </div>
 </template>
 
@@ -43,9 +62,10 @@ import emailjs from 'emailjs-com';
 export default {
   methods: {
     sendEmail: (e) => {
-      emailjs.sendForm('service_vztm2qa', 'template_86bun2d', e.target, 'user_v6guEmIacckV6bNjPCz5c')
+      emailjs.sendForm('service_vztm2qa', 'template_6w4skyd', e.target, 'user_v6guEmIacckV6bNjPCz5c')
         .then((result) => {
             console.log('SUCCESS!', result.status, result.text);
+            console.log(e);
         }, (error) => {
             console.log('FAILED...', error);
         });
@@ -53,78 +73,8 @@ export default {
   }
 }
 
-
-// import emailjsfrom 'emailjs-com';
-
-// export default {
-//   name: 'ContactUs',
-//   data() {
-//     return {
-//       name: '',
-//       email: '',
-//       message: ''
-//     }
-//   },
-//   methods: {
-//     sendEmail(e) {
-//       try {
-//         emailjs.sendForm('service_vztm2qa', 'template_86bun2d', e.target,
-//         'user_v6guEmIacckV6bNjPCz5c', {
-//           name: this.name,
-//           email: this.email,
-//           message: this.message
-//         })
-
-//       } catch(error) {
-//           console.log({error})
-//       }
-//       // Reset form field
-//       this.name = ''
-//       this.email = ''
-//       this.message = ''
-//     },
-//   }
-// }
 </script>
 
 <style scoped>
-* {box-sizing: border-box;}
 
-.container {
-  display: block;
-  margin:auto;
-  text-align: center;
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-  width: 50%;
-}
-
-label {
-  float: left;
-}
-
-input[type=text], [type=email], textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-top: 6px;
-  margin-bottom: 16px;
-  resize: vertical;
-}
-
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
 </style>
