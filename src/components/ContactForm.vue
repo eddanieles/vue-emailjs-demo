@@ -4,7 +4,7 @@
           src="../assets/machine learning.png"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
-        <v-form ref="form" class="contact-form" @submit.prevent="sendEmail">
+        <!-- <v-form ref="form" class="contact-form" @submit.prevent="sendEmail">
             <v-container class="fill-height">
                 <v-row justify="center" align="center" class="mt-5">
                     <v-col cols="12">
@@ -45,14 +45,42 @@
                 </v-row>
             </v-container>
 
-            <!-- <label>Name</label>
-            <input type="text" name="from_name">
-            <label>Email</label>
-            <input type="email" name="from_email">
-            <label>Message</label>
-            <textarea name="message"></textarea>
-            <input type="submit" value="Send"> -->
-        </v-form>
+        </v-form> -->
+        
+        
+        <FormulateForm
+            v-model="formValues" 
+            @submit="sendEmail" 
+            name="bookReturnForm">
+            <FormulateInput
+                type="text"
+                name="from_name"
+                placeholder="Your Name*"
+                validation="required"
+            />
+            <FormulateInput
+                type="email"
+                name="from_email"
+                placeholder="Your Email*"
+                validation="required|email"
+            />
+            <FormulateInput
+                type="tel"
+                name="from_phone"
+                placeholder="Your Phone"
+            />
+            <FormulateInput
+                type="textarea"
+                name="message"
+                placeholder="Your Message*"
+                validation="required|min:5,length"
+                :help="`Must be more than 4 characters.`"
+            />
+            <FormulateInput
+                type="submit"
+                name="Submit"
+            />
+        </FormulateForm>
         </v-img>
     </div>
 </template>
@@ -61,6 +89,11 @@
 import emailjs from 'emailjs-com';
 
 export default {
+  data() {
+      return {
+          formValues: {}
+      }
+  },
   methods: {
     sendEmail: (e) => {
       let that = this;
