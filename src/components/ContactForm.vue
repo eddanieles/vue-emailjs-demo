@@ -100,7 +100,6 @@ export default {
   },
   methods: {
     sendEmail: (e) => {
-    //   console.log(e)
       let formObj = {
           from_name: e.name, 
           from_email: e.email, 
