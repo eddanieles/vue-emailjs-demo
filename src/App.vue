@@ -16,7 +16,9 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../node_modules/@braid/vue-formulate/themes/snow/snow.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
