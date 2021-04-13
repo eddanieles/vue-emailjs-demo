@@ -52,6 +52,8 @@
             v-model="formValues" 
             @submit="sendEmail" 
             name="contactForm">
+            <v-row>
+            <v-col>
             <FormulateInput
                 type="text"
                 v-model="formValues.name"
@@ -69,6 +71,9 @@
                 v-model="formValues.phone"
                 placeholder="Your Phone"
             />
+            </v-col>
+
+            <v-col cols="8">
             <FormulateInput
                 type="textarea"
                 v-model="formValues.message"
@@ -79,6 +84,8 @@
                 type="submit"
                 name="Submit"
             />
+            </v-col>
+            </v-row>
         </FormulateForm>
         </v-img>
     </div>
@@ -114,6 +121,9 @@ export default {
             alert("Email FAILED...", error);
         });
     }
+  },
+  beforeUpdate() {
+      
   }
 }
 
