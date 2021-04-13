@@ -51,30 +51,29 @@
         <FormulateForm
             v-model="formValues" 
             @submit="sendEmail" 
-            name="bookReturnForm">
+            name="contactForm">
             <FormulateInput
                 type="text"
-                name="from_name"
+                v-model="formValues.name"
                 placeholder="Your Name*"
                 validation="required"
             />
             <FormulateInput
                 type="email"
-                name="from_email"
+                v-model="formValues.email"
                 placeholder="Your Email*"
                 validation="required|email"
             />
             <FormulateInput
                 type="tel"
-                name="from_phone"
+                v-model="formValues.phone"
                 placeholder="Your Phone"
             />
             <FormulateInput
                 type="textarea"
-                name="message"
+                v-model="formValues.message"
                 placeholder="Your Message*"
                 validation="required|min:5,length"
-                :help="`Must be more than 4 characters.`"
             />
             <FormulateInput
                 type="submit"
@@ -91,17 +90,26 @@ import emailjs from 'emailjs-com';
 export default {
   data() {
       return {
-          formValues: {}
+          formValues: {
+              name: "",
+              email: "",
+              phone: "",
+              message: ""
+          }
       }
   },
   methods: {
     sendEmail: (e) => {
-      let that = this;
-      emailjs.sendForm('service_vztm2qa', 'template_6w4skyd', e.target, 'user_v6guEmIacckV6bNjPCz5c')
+    //   console.log(e)
+      let formObj = {
+          from_name: e.name, 
+          from_email: e.email, 
+          message: e.message, 
+          from_phone: e.phone ? e.phone : "Not provided"
+      }
+      emailjs.send('service_vztm2qa', 'template_6w4skyd', formObj, 'user_v6guEmIacckV6bNjPCz5c')
         .then((result) => {
-            that.$refs.form.validate()
             console.log('SUCCESS!', result.status, result.text);
-            that.$refs.form.reset()
             alert("Email was successfully sent");
         }, (error) => {
             alert("Email FAILED...", error);
