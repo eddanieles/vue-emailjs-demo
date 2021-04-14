@@ -4,9 +4,12 @@
           src="../assets/machine learning.png"
           gradient="to top right, rgba(100,115,201,.33), rgba(25,32,72,.7)"
         >
-        <!-- <v-form ref="form" class="contact-form" @submit.prevent="sendEmail">
-            <v-container class="fill-height">
-                <v-row justify="center" align="center" class="mt-5">
+        <FormulateForm
+            v-model="formValues" 
+            @submit="sendEmail" 
+            name="contactForm">
+            <v-container>
+                <v-row>
                     <v-col cols="12">
                         <div class="pt-12 text-center">
                         <h3 class="display-1 font-weight-blod">
@@ -21,71 +24,44 @@
                     </v-col>
 
                     <v-col cols="12" md="6">
-                        <v-text-field name="from_name" label="Your Name*" solo light required></v-text-field>
-                        <v-text-field name="from_email" label="Your Email*" solo light required></v-text-field>
-                        <v-text-field name="from_phone" label="Your Phone" solo light></v-text-field>
+                        <FormulateInput
+                            type="text"
+                            v-model="formValues.name"
+                            placeholder="Your Name*"
+                            validation="required"
+                        />
+                        <FormulateInput
+                            type="email"
+                            v-model="formValues.email"
+                            placeholder="Your Email*"
+                            validation="required|email"
+                        />
+                        <FormulateInput
+                            type="tel"
+                            v-model="formValues.phone"
+                            placeholder="Your Phone"
+                        />
                     </v-col>
 
                     <v-col cols="12" md="6" class="fill-height">
-                        <v-textarea
-                        light
-                        outlined
-                        solo
-                        required
-                        name="message"
-                        label="Your Message*"
-                        ></v-textarea>
+                        <FormulateInput
+                            type="textarea"
+                            v-model="formValues.message"
+                            placeholder="Your Message*"
+                            validation="required|min:5,length"
+                        />
+                        
                     </v-col>
 
                     <v-col cols="12" class="text-center">
-                        <v-btn x-large color="accent">
-                        <input type="submit" value="Send Message">
-                        </v-btn>
+                        <FormulateInput
+                            type="submit"
+                            name="Submit"
+                        />
                     </v-col>
+                    
                 </v-row>
             </v-container>
-
-        </v-form> -->
-        
-        
-        <FormulateForm
-            v-model="formValues" 
-            @submit="sendEmail" 
-            name="contactForm">
-            <v-row>
-            <v-col>
-            <FormulateInput
-                type="text"
-                v-model="formValues.name"
-                placeholder="Your Name*"
-                validation="required"
-            />
-            <FormulateInput
-                type="email"
-                v-model="formValues.email"
-                placeholder="Your Email*"
-                validation="required|email"
-            />
-            <FormulateInput
-                type="tel"
-                v-model="formValues.phone"
-                placeholder="Your Phone"
-            />
-            </v-col>
-
-            <v-col cols="8">
-            <FormulateInput
-                type="textarea"
-                v-model="formValues.message"
-                placeholder="Your Message*"
-                validation="required|min:5,length"
-            />
-            <FormulateInput
-                type="submit"
-                name="Submit"
-            />
-            </v-col>
-            </v-row>
         </FormulateForm>
         </v-img>
     </div>
@@ -111,7 +87,7 @@ export default {
           from_name: e.name, 
           from_email: e.email, 
           message: e.message, 
-          from_phone: e.phone ? e.phone : "Not provided"
+          from_phone: e.phone ? e.phone : "not provided"
       }
       emailjs.send('service_vztm2qa', 'template_6w4skyd', formObj, 'user_v6guEmIacckV6bNjPCz5c')
         .then((result) => {
@@ -121,9 +97,6 @@ export default {
             alert("Email FAILED...", error);
         });
     }
-  },
-  beforeUpdate() {
-      
   }
 }
 

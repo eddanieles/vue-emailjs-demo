@@ -27,4 +27,12 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
+
+.formulate-input .formulate-input-element {
+    max-width: none;
+}
+
+.formulate-input[data-classification=textarea] textarea {
+  line-height: 5.2em;
+}
 </style>
