@@ -2,24 +2,23 @@
   <div id="app">
     <contact-form/>
     <img alt="Vue logo" src="./assets/logo.png">
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import ContactForm from './components/ContactForm.vue'
 
 export default {
   name: 'App',
   components: {
-    // HelloWorld,
     ContactForm
   }
 }
 </script>
 
-<style>
+<style lang="scss">
+@import '../node_modules/@braid/vue-formulate/themes/snow/snow.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,5 +26,13 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.formulate-input .formulate-input-element {
+    max-width: none;
+}
+
+.formulate-input[data-classification=textarea] textarea {
+  line-height: 5.2em;
 }
 </style>
